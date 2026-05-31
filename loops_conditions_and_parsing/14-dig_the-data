@@ -1,3 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Correct formatting without leading spaces
 awk '{print $1, $9}' access.log | sort | uniq -c | sort -nr
 
