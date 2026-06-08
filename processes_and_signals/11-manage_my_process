@@ -11,15 +11,21 @@ start() {
 
 stop() {
     if [ -f "$PIDFILE" ]; then
-        kill "$(cat "$PIDFILE")"
+        kill "$(cat "$PIDFILE")" 2>/dev/null
         rm -f "$PIDFILE"
     fi
     echo "manage_my_process stopped"
 }
 
 restart() {
-    stop
-    start
+    if [ -f "$PIDFILE" ]; then
+        kill "$(cat "$PIDFILE")" 2>/dev/null
+        rm -f "$PIDFILE"
+    fi
+
+    ./manage_my_process &
+    echo $! > "$PIDFILE"
+
     echo "manage_my_process restarted"
 }
 
