@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 # Script that kills the process named 7-highlander
 
-kill "$(pidof 7-highlander)"
+PID=$(pidof 7-highlander)
+
+if [ -n "$PID" ]; then
+  kill "$PID"
+fi
 
